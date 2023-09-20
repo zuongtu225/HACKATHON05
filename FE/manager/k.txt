@@ -1,0 +1,66 @@
+  {/* <div className="ADD">
+        <Button variant="success" onClick={handleShowAdd}>
+          CREATE USER
+        </Button>
+        <Modal show={showAdd} onHide={handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>
+              <h1>Create New User</h1>
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body className="flexInput1 input1">
+            <label>Name</label>
+            <input onChange={(e) => setName(e.target.value)} type="text" />
+          </Modal.Body>
+          <Modal.Body className="flexInput">
+            <label>Desciption</label>
+            <textarea
+              onChange={(e) => setDescription(e.target.value)}
+              cols="30"
+              rows="10"
+            ></textarea>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleClose}>
+              Close
+            </Button>
+            <Button variant="primary" onClick={addUser}>
+              CREATE
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      </div>
+      <div className="EDIT">
+        <Modal show={showEdit} onHide={handleCloseEDIT}>
+          <Modal.Header closeButton>
+            <Modal.Title>
+              <h1> UPDATE USER</h1>
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body className="flexInput1 input1">
+            <label>Name</label>
+            <input
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              type="text"
+            />
+          </Modal.Body>
+          <Modal.Body className="flexInput">
+            <label>Desciption</label>
+            <textarea
+              onChange={(e) => setDescription(e.target.value)}
+              cols="30"
+              rows="10"
+              value={description}
+            ></textarea>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleCloseEDIT}>
+              Close
+            </Button>
+            <Button variant="primary" onClick={submit}>
+              CREATE
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      </div> */}{" "}

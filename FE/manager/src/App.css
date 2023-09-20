@@ -1,0 +1,58 @@
+
+.game-wraper{
+  width: 80%;
+  margin: 0 auto;
+}
+
+.flexInput{
+  display: flex;
+  gap: 20px;
+}
+.flexInput input, textarea{
+  width: 70%;
+}
+.input1 input{
+  margin-left: 50px;
+}
+h1{
+text-align: center;
+padding:20px ;
+}
+
+.ADD, .EDIT{
+  margin: 20px;
+  width: max-content;
+}
+
+table {
+  margin: 0 auto;
+  text-align: center;
+  width: 80%;
+  border-collapse: collapse;
+  border-top: 1px solid black;
+}
+
+ th {
+  padding: 10px 30px;
+  border: 1px solid black;
+}
+td{
+    padding: 10px 35px;
+    width: 40px;  
+    border: 1px solid black;
+}
+td input{
+  width: 50px;
+  padding-left: 12px;
+}
+.color-sum{
+  background-color: #00a2f9;
+  color: white;
+}
+.btnDelete{
+  background-color: red;
+}
+.minus, .plus{
+  cursor: pointer;
+  margin: 4px;
+}
