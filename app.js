@@ -153,8 +153,7 @@ app.delete("/api/post/delete/:id", (req, res) => {
   if (!find) {
     return res.status(504).json({ sucess: false, message: "ID không đúng" });
   }
-  const newdata = listPost.filter((item) => item.id !== idP);
-  console.log(newdata);
+  const newdata = listPost.filter((item) => item.id !== find.id);
   fs.writeFileSync("./Data/posts.json", JSON.stringify(newdata));
   return res.status(200).json({ sucess: true, message: "Xóa thành công" });
 });
