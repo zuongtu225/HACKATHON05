@@ -10,26 +10,6 @@ app.use(bodyParser.json());
 const listUsers = JSON.parse(fs.readFileSync("./Data/users.json", "utf-8"));
 const listPost = JSON.parse(fs.readFileSync("./Data/posts.json", "utf-8"));
 
-//Midleware
-const validateUser = (req, res, next) => {
-  const id = req.params.id;
-  const body = req.body;
-  if (id) {
-    const find = listUsers.find((item) => item.id == id);
-    if (!find) {
-      return res.status(504).json({ sucess: false, message: "ID không đúng" });
-    }
-  }
-  if (body) {
-    const find = users.find((item) => item.email == body.email);
-    if (find) {
-      return res
-        .status(504)
-        .json({ sucess: false, message: "Email đã tồn tại" });
-    }
-  }
-  next();
-};
 // HOME PAGE
 app.get("/", (req, res) => {
   res.send(
@@ -39,11 +19,11 @@ app.get("/", (req, res) => {
 
 // ---------USER----------
 // GET ALL USER
-app.get("/api/users", validateUser, (req, res) => {
+app.get("/api/users", (req, res) => {
   return res.status(200).json(listUsers);
 });
 // GET 1 USER
-app.get("/api/users/detail/:id", validateUser, (req, res) => {
+app.get("/api/users/detail/:id", (req, res) => {
   const id = req.params.id;
   const find = listUsers.find((item) => item.id == id);
   if (!find) {
@@ -54,7 +34,7 @@ app.get("/api/users/detail/:id", validateUser, (req, res) => {
   return res.status(200).json({ sucess: true, data: find });
 });
 // POST NEW USER
-app.post("/api/users/create", validateUser, (req, res) => {
+app.post("/api/users/create", (req, res) => {
   const body = req.body;
   const findUser = listUsers.find((user) => user.email == body.email);
   if (findUser) {
@@ -72,7 +52,7 @@ app.post("/api/users/create", validateUser, (req, res) => {
   return res.status(200).json({ sucess: true, message: "Thêm thành công" });
 });
 // PUT USER
-app.put("/api/users/update/:id", validateUser, (req, res) => {
+app.put("/api/users/update/:id", (req, res) => {
   const id = req.params.id;
   const body = req.body;
   const newDataUser = listUsers.map((item) => {
@@ -88,9 +68,15 @@ app.put("/api/users/update/:id", validateUser, (req, res) => {
   return res.status(200).json({ sucess: true, message: "Thêm thành công" });
 });
 // DELETE USER
-app.delete("/api/users/delete/:id", validateUser, (req, res) => {
+app.delete("/api/users/delete/:id", (req, res) => {
   const id = req.params.id;
-  const newDataUser = listUsers.filter((item) => item.id !== id);
+  const find = listPost.find((item) => item.id == id);
+  if (!find) {
+    return res
+      .status(504)
+      .json({ sucess: false, message: "Không tồn tại post" });
+  }
+  const newDataUser = listUsers.filter((item) => item.id !== find.id);
   fs.writeFileSync("./Data/users.json", JSON.stringify(newDataUser));
   return res.status(200).json({ sucess: true, message: "Xóa thành công" });
 });
@@ -132,7 +118,7 @@ app.put("/api/post/update/:id", (req, res) => {
   if (!find) {
     return res.status(504).json({ sucess: false, message: "ID không đúng" });
   }
-  const newPostData = listUsers.map((item) => {
+  const newPostData = listPost.map((item) => {
     if (item.id == id) {
       return {
         ...item,
@@ -147,17 +133,14 @@ app.put("/api/post/update/:id", (req, res) => {
 // DELETE POST
 app.delete("/api/post/delete/:id", (req, res) => {
   const idP = req.params.id;
+  const find = listPost.find((item) => item.id == idP);
   if (!find) {
     return res.status(504).json({ sucess: false, message: "ID không đúng" });
   }
-
-  const find = listPost.find((item) => item.id == idP);
   const newdata = listPost.filter((item) => item.id !== find.id); // special => find.id mới xóa được
-
   fs.writeFileSync("./Data/posts.json", JSON.stringify(newdata));
   return res.status(200).json({ sucess: true, message: "Xóa thành công" });
 });
-
 // listent
 app.listen(port, () => {
   console.log(`http://localhost:${port}/`);
