@@ -1,0 +1,72 @@
+{
+	"info": {
+		"_postman_id": "bc48a3f4-f9a5-479a-8bdb-17566ccfb519",
+		"name": "Hackathon4 Advanced",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "29261732"
+	},
+	"item": [
+		{
+			"name": "New Request",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": "http://localhost:5000/users/2"
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "Dương Văn TÚ",
+							"type": "text"
+						},
+						{
+							"key": "body",
+							"value": "This is a title 22222222222",
+							"type": "text"
+						},
+						{
+							"key": "",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "website",
+							"value": "hildegard.org",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": "http://localhost:9000/api/post/delete/1"
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": "http://localhost:8000/api/post/delete/10"
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8000/api/post/detail/"
+			},
+			"response": []
+		}
+	]
+}
