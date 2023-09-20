@@ -9,8 +9,9 @@ app.use(bodyParser.json());
 // DATA
 const listUsers = JSON.parse(fs.readFileSync("./Data/users.json", "utf-8"));
 const listPost = JSON.parse(fs.readFileSync("./Data/posts.json", "utf-8"));
+
 //Midleware
-const validate = (req, res, next) => {
+const validateUser = (req, res, next) => {
   const id = req.params.id;
   const body = req.body;
   if (id) {
@@ -38,11 +39,11 @@ app.get("/", (req, res) => {
 
 // ---------USER----------
 // GET ALL USER
-app.get("/api/users", validate, (req, res) => {
+app.get("/api/users", validateUser, (req, res) => {
   return res.status(200).json(listUsers);
 });
 // GET 1 USER
-app.get("/api/users/detail/:id", validate, (req, res) => {
+app.get("/api/users/detail/:id", validateUser, (req, res) => {
   const id = req.params.id;
   const find = listUsers.find((item) => item.id == id);
   if (!find) {
@@ -53,7 +54,7 @@ app.get("/api/users/detail/:id", validate, (req, res) => {
   return res.status(200).json({ sucess: true, data: find });
 });
 // POST NEW USER
-app.post("/api/users/create", validate, (req, res) => {
+app.post("/api/users/create", validateUser, (req, res) => {
   const body = req.body;
   const findUser = listUsers.find((user) => user.email == body.email);
   if (findUser) {
@@ -71,7 +72,7 @@ app.post("/api/users/create", validate, (req, res) => {
   return res.status(200).json({ sucess: true, message: "Thêm thành công" });
 });
 // PUT USER
-app.put("/api/users/update/:id", validate, (req, res) => {
+app.put("/api/users/update/:id", validateUser, (req, res) => {
   const id = req.params.id;
   const body = req.body;
   const newDataUser = listUsers.map((item) => {
@@ -87,7 +88,7 @@ app.put("/api/users/update/:id", validate, (req, res) => {
   return res.status(200).json({ sucess: true, message: "Thêm thành công" });
 });
 // DELETE USER
-app.delete("/api/users/delete/:id", validate, (req, res) => {
+app.delete("/api/users/delete/:id", validateUser, (req, res) => {
   const id = req.params.id;
   const newDataUser = listUsers.filter((item) => item.id !== id);
   fs.writeFileSync("./Data/users.json", JSON.stringify(newDataUser));
