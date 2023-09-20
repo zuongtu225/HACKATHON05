@@ -70,7 +70,6 @@ app.post("/api/users/create", validate, (req, res) => {
   fs.writeFileSync("./Data/users.json", JSON.stringify(newDataUser));
   return res.status(200).json({ sucess: true, message: "Thêm thành công" });
 });
-
 // PUT USER
 app.put("/api/users/update/:id", validate, (req, res) => {
   const id = req.params.id;
@@ -87,7 +86,6 @@ app.put("/api/users/update/:id", validate, (req, res) => {
   fs.writeFileSync("./Data/users.json", JSON.stringify(newDataUser));
   return res.status(200).json({ sucess: true, message: "Thêm thành công" });
 });
-
 // DELETE USER
 app.delete("/api/users/delete/:id", validate, (req, res) => {
   const id = req.params.id;
@@ -145,19 +143,21 @@ app.put("/api/post/update/:id", (req, res) => {
   fs.writeFileSync("./Data/posts.json", JSON.stringify(newPostData));
   return res.status(200).json({ sucess: true, message: "Sửa thành công" });
 });
-
 // DELETE POST
 app.delete("/api/post/delete/:id", (req, res) => {
   const idP = req.params.id;
-  const find = listPost.find((item) => item.id == idP);
   if (!find) {
     return res.status(504).json({ sucess: false, message: "ID không đúng" });
   }
-  const newdata = listPost.filter((item) => item.id !== find.id);
+
+  const find = listPost.find((item) => item.id == idP);
+  const newdata = listPost.filter((item) => item.id !== find.id); // special => find.id mới xóa được
+
   fs.writeFileSync("./Data/posts.json", JSON.stringify(newdata));
   return res.status(200).json({ sucess: true, message: "Xóa thành công" });
 });
 
+// listent
 app.listen(port, () => {
   console.log(`http://localhost:${port}/`);
 });
